@@ -6,19 +6,19 @@ public class Comment {
     private String body;
     private String commentTime;
     private  int postID;
-    private int userID;
+    private User user;
 
 
     public Comment() {
         super();
     }
 
-    public Comment(int commentID, String body, String commentTime, int postID, int userID) {
+    public Comment(int commentID, String body, String commentTime, int postID, User user) {
         this.commentID = commentID;
         this.body = body;
         this.commentTime = commentTime;
         this.postID = postID;
-        this.userID = userID;
+        this.user = user;
     }
 
     public int getCommentID() {
@@ -53,12 +53,12 @@ public class Comment {
         this.postID = postID;
     }
 
-    public int getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Comment {
                 ", body='" + body + '\'' +
                 ", commentTime='" + commentTime + '\'' +
                 ", postID=" + postID +
-                ", userID=" + userID +
+                ", user=" + user +
                 '}';
     }
 }

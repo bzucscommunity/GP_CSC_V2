@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import project.bzu.csc.Adapters.GetAllPostsAdapter;
 import project.bzu.csc.Models.Post;
 import project.bzu.csc.Models.User;
@@ -48,7 +49,7 @@ public class Home extends AppCompatActivity {
     RecyclerView recyclerView;
     GetAllPostsAdapter adapter;
     TextView test;
-    ImageView accountImage;
+    CircleImageView accountImage;
     SharedPreferences sp;
     User user;
     int userID;
@@ -97,7 +98,7 @@ public class Home extends AppCompatActivity {
         sp = getApplicationContext().getSharedPreferences("User", Context.MODE_PRIVATE);
         userID = sp.getInt("userID" , 0);
         extractUser();
-        extractPosts("http://192.168.1.109:8080/api/get");
+        extractPosts("http://192.168.1.109:8080/api/get/Time");
 
         FloatingActionButton fab_addNewPost = findViewById(R.id.fab_add);
         fab_addNewPost.setOnClickListener(new View.OnClickListener(){

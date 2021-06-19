@@ -82,6 +82,17 @@ public class GetAllPostsAdapter extends RecyclerView.Adapter<GetAllPostsAdapter.
         else if(posts.get(position).getPostType().equals("Topic")){
             holder.postType.setText("T");}
 
+
+        if( posts.get(position).getPostAttachment().equals("Video")){
+            Picasso.get().load("https://cdn.icon-icons.com/icons2/792/PNG/512/YOUTUBE_icon-icons.com_65537.png").into(holder.image5);
+            // holder.imagesPreviews.setVisibility(View.VISIBLE);
+            holder.image5.setVisibility(View.VISIBLE);
+
+        }
+        else{
+            holder.image5.setVisibility(View.GONE);
+        }
+
         holder.postTitle.setText(posts.get(position).getPostTitle());
         holder.postContent.setText(posts.get(position).getPostBody());
         String tagsString=posts.get(position).getPostTags();
@@ -190,12 +201,11 @@ public class GetAllPostsAdapter extends RecyclerView.Adapter<GetAllPostsAdapter.
                 holder.image4.setVisibility(View.VISIBLE);
                 holder.image5.setVisibility(View.VISIBLE);
             }
+
         }
-        String flag = posts.get(position).getPostTitle();
-        if(flag .equalsIgnoreCase("Dijkstra’s Shortest Path Algorithm")||flag.equalsIgnoreCase("Data structures")){
-            Picasso.get().load("https://cdn.icon-icons.com/icons2/792/PNG/512/YOUTUBE_icon-icons.com_65537.png").into(holder.image2);
-            holder.imagesPreviews.setVisibility(View.VISIBLE);
-            holder.image2.setVisibility(View.VISIBLE);}
+
+
+
 //        String videosString=posts.get(position).getPostTags();
 //        String[] videosArray=videosString.split(",");
 //        if(videosArray.length==1){
@@ -260,10 +270,10 @@ public class GetAllPostsAdapter extends RecyclerView.Adapter<GetAllPostsAdapter.
             tag3=itemView.findViewById(R.id.tag3);
             tag4=itemView.findViewById(R.id.tag4);
             tag5=itemView.findViewById(R.id.tag5);
-
-            postViews=itemView.findViewById(R.id.post_views);
-            postComments=itemView.findViewById(R.id.post_comments);
-            postShares=itemView.findViewById(R.id.post_shares);
+//
+//            postViews=itemView.findViewById(R.id.post_views);
+//            postComments=itemView.findViewById(R.id.post_comments);
+//            postShares=itemView.findViewById(R.id.post_shares);
             image =  itemView.findViewById(R.id.userImage);
             postMoreMenu=itemView.findViewById(R.id.post_more_menu);
             image1=itemView.findViewById(R.id.image_preview1);

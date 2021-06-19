@@ -107,9 +107,9 @@ public class ViewPostInHome extends AppCompatActivity{
         tag4=findViewById(R.id.tag4);
         tag5=findViewById(R.id.tag5);
 
-        postViews=findViewById(R.id.post_views);
-        postComments=findViewById(R.id.post_comments);
-        postShares=findViewById(R.id.post_shares);
+//        postViews=findViewById(R.id.post_views);
+//        postComments=findViewById(R.id.post_comments);
+//        postShares=findViewById(R.id.post_shares);
         image = (CircleImageView) findViewById(R.id.userImage);
         postMoreMenu=findViewById(R.id.post_more_menu);
         image1=findViewById(R.id.image_preview1);
@@ -409,7 +409,7 @@ public class ViewPostInHome extends AppCompatActivity{
 
         try {
 
-            postData.put("userID",userID);
+            //postData.put("userID","1170288");
             postData.put("postID",postID);
             postData.put("body", commentsText.getText().toString().trim());
             postData.put("commentTime",strdate);
@@ -446,24 +446,17 @@ public class ViewPostInHome extends AppCompatActivity{
                     try {
                         JSONObject commentObject = response.getJSONObject(i);
                         Comment comment = new  Comment();
-//                        String user1=  commentObject.getString("user");
-//                        Gson g = new Gson();
-//                        User user = g.fromJson(user1, User.class);
+                        String user1=  commentObject.getString("user");
+                        Gson g = new Gson();
+                        User user = g.fromJson(user1, User.class);
                         comment.setCommentID(commentObject.getInt("commentID"));
                         comment.setBody(commentObject.getString("body"));
                         comment.setCommentTime(commentObject.getString("commentTime"));
-                        comment.setUserID(commentObject.getInt("userID"));
-                        IDs.add(comment.getUserID());
-
-                        //users.add(extractUsersForComments(commentObject.getInt("userID")));
-
-
-
+                        comment.setUser(user);
                         comment.setPostID(commentObject.getInt("postID"));
 
                         comments.add(comment);
-                        Log.d("500",comments.toString());
-
+                        Log.d("TAG", "onResponse: "+ comments.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -472,22 +465,10 @@ public class ViewPostInHome extends AppCompatActivity{
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-                for (int i=0;i<IDs.size();i++){
-
-
-                User user3 = extractUsersForComments(IDs.get(i));
-                        users.add(user3);
-                    Log.d("IDsArray", user3.toString() + i);
-
-
-                }
-
-
-             //   adapter = new GetCommentsAdapter(getApplicationContext(),comments,users);
-              //  recyclerView.setAdapter(adapter);
-
+                adapter = new GetCommentsAdapter(getApplicationContext(),comments);
+                recyclerView.setAdapter(adapter);
             }
-            }, new Response.ErrorListener(){
+        }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("tag", "onErrorResponse: testExtractPosts" + error.getMessage());

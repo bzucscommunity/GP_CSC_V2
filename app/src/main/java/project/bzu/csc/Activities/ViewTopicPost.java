@@ -96,9 +96,9 @@ public class ViewTopicPost extends AppCompatActivity{
         tag4=findViewById(R.id.tag4);
         tag5=findViewById(R.id.tag5);
 
-        postViews=findViewById(R.id.post_views);
-        postComments=findViewById(R.id.post_comments);
-        postShares=findViewById(R.id.post_shares);
+//        postViews=findViewById(R.id.post_views);
+//        postComments=findViewById(R.id.post_comments);
+//        postShares=findViewById(R.id.post_shares);
         image = (CircleImageView) findViewById(R.id.userImage);
         postMoreMenu=findViewById(R.id.post_more_menu);
         image1=findViewById(R.id.image_preview1);
@@ -425,7 +425,7 @@ public class ViewTopicPost extends AppCompatActivity{
                         comment.setCommentID(commentObject.getInt("commentID"));
                         comment.setBody(commentObject.getString("body"));
                         comment.setCommentTime(commentObject.getString("commentTime"));
-                        comment.setUserID(userID);
+                        comment.setUser(user);
                         comment.setPostID(commentObject.getInt("postID"));
 
                         comments.add(comment);
@@ -438,7 +438,7 @@ public class ViewTopicPost extends AppCompatActivity{
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-                adapter = new GetCommentsAdapter(getApplicationContext(),comments,users);
+                adapter = new GetCommentsAdapter(getApplicationContext(),comments);
                 recyclerView.setAdapter(adapter);
             }
         }, new Response.ErrorListener(){

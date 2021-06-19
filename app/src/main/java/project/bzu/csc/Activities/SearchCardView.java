@@ -1,16 +1,20 @@
 package project.bzu.csc.Activities;
 
 import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -39,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import project.bzu.csc.Adapters.GetCategoriesPostsAdapter;
@@ -52,6 +57,9 @@ public class SearchCardView extends AppCompatActivity {
     List<User> users;
     RecyclerView recyclerView;
     GetCategoriesPostsAdapter adapter;
+    boolean filtered = false;
+    String filterTime = "";
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     String name;
     Dialog dialog;
@@ -60,12 +68,17 @@ public class SearchCardView extends AppCompatActivity {
     SharedPreferences sp;
     User user;
     int userID;
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         name = intent.getStringExtra("subjectNameFromSearch");
+        filtered = intent.getBooleanExtra("filter", false);
+        // filtered = intent.getBooleanExtra("");
+        filterTime = intent.getStringExtra("date");
+
         Log.d("TAG", "onCreate: YESS??" + name);
         setContentView(R.layout.recycler_view_search_layout);
         BottomNavigationView BttomnavigationView = findViewById(R.id.bottomNavigationView);
@@ -104,24 +117,52 @@ public class SearchCardView extends AppCompatActivity {
         users = new ArrayList<>();
         accountImage = findViewById(R.id.account);
         sp = getApplicationContext().getSharedPreferences("User", Context.MODE_PRIVATE);
-        userID = sp.getInt("userID" , 0);
+        userID = sp.getInt("userID", 0);
         extractUser();
         Log.d("test", "onCreate: hell0");
-
+        extractPosts();
         FloatingActionButton fab_addNewPost = findViewById(R.id.fab_add);
         fab_addNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-               showAlertDialog();
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), MoreMenu.class);
+//                intent.putExtra("subjectName",name);
+//                startActivity(intent);
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(SearchCardView.this,android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setTitle("Select a Date to filter By");
+                dialog.show();
             }
-
-
         });
-        extractPosts();
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                //Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+
+                filterTime = day + "-" + month + "-" + year;
+                // mDisplayDate.setText(date);
+                filter();
+            }
+        };
+
+
+
+
+
+
+
+
     }
     private void extractPosts() {
         RequestQueue queue= Volley.newRequestQueue(this);
-        String JSON_URL="http://192.168.1.109:8080/api/getPostBySubject/"+name;
+        String JSON_URL="http://192.168.1.109:8080/api/subject/"+name;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
 
             @Override
@@ -214,7 +255,7 @@ public class SearchCardView extends AppCompatActivity {
     public void filter(){
         posts.clear();
         RequestQueue queue= Volley.newRequestQueue(this);
-        String JSON_URL="http://192.168.1.109:8080/api/typeSubject/"+filterBy+"/"+name;
+        String JSON_URL="http://192.168.1.109:8080/api/filter/"+name+"/"+filterTime;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
 
             @Override

@@ -255,9 +255,9 @@ public class GetQuestionPostsAdapter extends RecyclerView.Adapter<GetQuestionPos
             tag4=itemView.findViewById(R.id.tag4);
             tag5=itemView.findViewById(R.id.tag5);
 
-            postViews=itemView.findViewById(R.id.post_views);
-            postComments=itemView.findViewById(R.id.post_comments);
-            postShares=itemView.findViewById(R.id.post_shares);
+//            postViews=itemView.findViewById(R.id.post_views);
+//            postComments=itemView.findViewById(R.id.post_comments);
+//            postShares=itemView.findViewById(R.id.post_shares);
             image =  itemView.findViewById(R.id.userImage);
             postMoreMenu=itemView.findViewById(R.id.post_more_menu);
             image1=itemView.findViewById(R.id.image_preview1);

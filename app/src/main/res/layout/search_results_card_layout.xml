@@ -9,8 +9,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="394dp"
+        android:layout_height="175dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -20,17 +20,18 @@
         app:contentPadding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/post_body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="380dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
             android:layout_marginTop="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,56 +48,51 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
-                    android:id="@+id/post_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="286dp"
-                    android:layout_marginLeft="286dp"
-                    android:layout_marginTop="4dp"
-                    android:text="Time Posted"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/postType" />
-
+            <TextView
+                android:id="@+id/post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Time Posted"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postType" />
 
             <TextView
                 android:id="@+id/postType"
                 android:layout_width="22dp"
                 android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
                 android:background="#0E0E52"
                 android:gravity="center"
                 android:text="Letter"
                 android:textAllCaps="true"
                 android:textColor="#F8F7F7"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.939"
-                app:layout_constraintStart_toEndOf="@+id/post_Title"
-                app:layout_constraintTop_toBottomOf="@+id/post_more_menu" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/post_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="1dp"
                 android:autoSizeMaxTextSize="15dp"
                 android:autoSizeMinTextSize="14sp"
                 android:autoSizeTextType="uniform"
                 android:maxHeight="70dp"
                 android:text="Post Body Hint"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_Title" />
-
-
-
+                app:layout_constraintTop_toBottomOf="@+id/post_time" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/tags"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/post_content">
 
@@ -150,7 +146,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import project.bzu.csc.Adapters.GetAllPostsAdapter;
 import project.bzu.csc.Models.Favorites;
 import project.bzu.csc.Models.Post;
@@ -51,6 +52,8 @@ public class Favorits extends AppCompatActivity {
     SharedPreferences sp;
     User user;
     int userID;
+    CircleImageView ImageViewUser;
+
     public static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +92,7 @@ public class Favorits extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.favoritesList);
-        userImage = findViewById(R.id.imageView);
+       ImageViewUser = findViewById(R.id.imageView);
         userName = findViewById(R.id.textView);
 
         posts=new ArrayList<>();
@@ -215,7 +218,7 @@ public class Favorits extends AppCompatActivity {
                                     user.setUserPassword(response.getString("userPassword").toString());
                                     user.setUserImage((response.getString("userImage").toString()));
 
-                                    Picasso.get().load(user.getUserImage()).into(userImage);
+                                    Picasso.get().load(user.getUserImage()).into(ImageViewUser);
                                     userName.setText(user.getFirstName()+" "+user.getLastName());
                                   // Log.d("userName",user.getFirstName());
 
